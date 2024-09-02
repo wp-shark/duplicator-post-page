@@ -11,10 +11,9 @@
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       duplicator-post-page
  * Domain Path:       /languages
- *
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
@@ -25,7 +24,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 define('DUPLICATOR_POST_PAGE_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('DUPLICATOR_POST_PAGE_PLUGIN_DIR', plugin_dir_path(__FILE__));
-
 
 /**
  * Defining plugin version
@@ -43,10 +41,6 @@ class Duplicator_Post_Page_Version {
 /**
  * Loads the plugin text domain for the Gutenkit Blocks Addon.
  *
- * This function is responsible for loading the translation files for the plugin.
- * It sets the text domain to 'duplicator-post-page' and specifies the directory
- * where the translation files are located.
- *
  * @param string $domain   The text domain for the plugin.
  * @param bool   $network  Whether the plugin is network activated.
  * @param string $directory The directory where the translation files are located.
@@ -55,6 +49,31 @@ class Duplicator_Post_Page_Version {
  */
 load_plugin_textdomain( 'duplicator-post-page', false, DUPLICATOR_POST_PAGE_PLUGIN_DIR . 'languages/' );
 
+/**
+ * Custom slashing functions to prevent special characters from being converted.
+ */
+class Duplicator_Post_Page_Helper {
+	/**
+	 * Adds slashes only to strings.
+	 *
+	 * @param mixed $value Value to slash only if string.
+	 * @return string|mixed
+	 */
+	public static function addslashes_to_strings_only( $value ) {
+		return is_string( $value ) ? addslashes( $value ) : $value;
+	}
+
+	/**
+	 * Replaces faulty core wp_slash().
+	 *
+	 * @param mixed $value What to add slashes to.
+	 * @return mixed
+	 */
+	public static function recursively_slash_strings( $value ) {
+		return map_deep( $value, [ self::class, 'addslashes_to_strings_only' ] );
+	}
+}
+
 function duplicator_post_page() {
 	if (isset($_GET['action']) && $_GET['action'] == 'duplicator_post_page' && isset($_GET['post'])) {
 		$post_id = absint($_GET['post']);
@@ -62,8 +81,8 @@ function duplicator_post_page() {
 
 		if ($post) {
 			$new_post = array(
-				'post_title'    => $post->post_title . ' (Copy)',
-				'post_content'  => $post->post_content,
+				'post_title'    => Duplicator_Post_Page_Helper::recursively_slash_strings($post->post_title . ' (Copy)'),
+				'post_content'  => Duplicator_Post_Page_Helper::recursively_slash_strings($post->post_content),
 				'post_status'   => 'draft',
 				'post_type'     => $post->post_type,
 				'post_author'   => $post->post_author,
@@ -75,7 +94,7 @@ function duplicator_post_page() {
 				$post_meta = get_post_meta($post_id);
 				foreach ($post_meta as $meta_key => $meta_values) {
 					foreach ($meta_values as $meta_value) {
-						add_post_meta($new_post_id, $meta_key, maybe_unserialize($meta_value));
+						add_post_meta($new_post_id, $meta_key, maybe_unserialize(Duplicator_Post_Page_Helper::recursively_slash_strings($meta_value)));
 					}
 				}
 
