@@ -1,7 +1,6 @@
 <?php
 /**
  * Plugin Name:       Duplicator Post Page
- * Plugin URI:        duplicator-post-page
  * Description:       Duplicate post and page with a single click.
  * Requires at least: 6.1
  * Requires PHP:      7.0
@@ -10,7 +9,6 @@
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       duplicator-post-page
- * Domain Path:       /languages
  */
 
  if ( ! defined( 'ABSPATH' ) ) {
@@ -39,17 +37,6 @@ class Duplicator_Post_Page_Version {
 }
 
 /**
- * Loads the plugin text domain for the Gutenkit Blocks Addon.
- *
- * @param string $domain   The text domain for the plugin.
- * @param bool   $network  Whether the plugin is network activated.
- * @param string $directory The directory where the translation files are located.
- * @return bool True on success, false on failure.
- * @since 1.0.0
- */
-load_plugin_textdomain( 'duplicator-post-page', false, DUPLICATOR_POST_PAGE_PLUGIN_DIR . 'languages/' );
-
-/**
  * Custom slashing functions to prevent special characters from being converted.
  */
 class Duplicator_Post_Page_Helper {
@@ -74,8 +61,16 @@ class Duplicator_Post_Page_Helper {
 	}
 }
 
+/**
+ * Function to duplicate the post/page.
+ */
 function duplicator_post_page() {
 	if (isset($_GET['action']) && $_GET['action'] == 'duplicator_post_page' && isset($_GET['post'])) {
+		// Verify the nonce
+		if ( ! check_admin_referer( 'duplicator_post_page_nonce' ) ) {
+			wp_die( esc_html__( 'Nonce verification failed.', 'duplicator-post-page' ) );
+		}
+
 		$post_id = absint($_GET['post']);
 		$post = get_post($post_id);
 
@@ -114,9 +109,15 @@ function duplicator_post_page() {
 }
 add_action('admin_action_duplicator_post_page', 'duplicator_post_page');
 
+/**
+ * Add the "Duplicate" link to the post/page actions.
+ */
+/**
+ * Add the "Duplicate" link to the post/page actions.
+ */
 function duplicator_post_page_link($actions, $post) {
 	if (in_array($post->post_type, array('post', 'page')) && current_user_can('edit_posts')) {
-		$actions['duplicate'] = '<a href="' . wp_nonce_url('admin.php?action=duplicator_post_page&post=' . $post->ID, basename(__FILE__), 'duplicate_nonce') . '" title="' . __('Duplicate this', 'duplicator-post-page') . '" rel="permalink">' . __('Duplicate', 'duplicator-post-page') . '</a>';
+		$actions['duplicate'] = '<a href="' . esc_url(wp_nonce_url('admin.php?action=duplicator_post_page&post=' . $post->ID, 'duplicator_post_page_nonce')) . '" title="' . esc_attr__('Duplicate this', 'duplicator-post-page') . '" rel="permalink">' . esc_html__('Duplicate', 'duplicator-post-page') . '</a>';
 	}
 	return $actions;
 }
