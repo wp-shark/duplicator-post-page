@@ -65,47 +65,52 @@ class Duplicator_Post_Page_Helper {
  * Function to duplicate the post/page.
  */
 function duplicator_post_page() {
-	if (isset($_GET['action']) && $_GET['action'] == 'duplicator_post_page' && isset($_GET['post'])) {
-		// Verify the nonce
-		if ( ! check_admin_referer( 'duplicator_post_page_nonce' ) ) {
-			wp_die( esc_html__( 'Nonce verification failed.', 'duplicator-post-page' ) );
-		}
+if (isset($_GET['action']) && $_GET['action'] == 'duplicator_post_page' && isset($_GET['post'])) {
+	// Verify the nonce
+	if ( ! check_admin_referer( 'duplicator_post_page_nonce' ) ) {
+		wp_die( esc_html__( 'Nonce verification failed.', 'duplicator-post-page' ) );
+	}
 
-		$post_id = absint($_GET['post']);
-		$post = get_post($post_id);
+	// Check if the current user has permission to edit posts/pages
+	if ( ! current_user_can( 'edit_post', $_GET['post'] ) ) {
+		wp_die( esc_html__( 'You are not allowed to duplicate this post.', 'duplicator-post-page' ) );
+	}
 
-		if ($post) {
-			$new_post = array(
-				'post_title'    => Duplicator_Post_Page_Helper::recursively_slash_strings($post->post_title . ' (Copy)'),
-				'post_content'  => Duplicator_Post_Page_Helper::recursively_slash_strings($post->post_content),
-				'post_status'   => 'draft',
-				'post_type'     => $post->post_type,
-				'post_author'   => $post->post_author,
-			);
-			$new_post_id = wp_insert_post($new_post);
+	$post_id = absint($_GET['post']);
+	$post = get_post($post_id);
 
-			if ($new_post_id) {
-				// Copy metadata
-				$post_meta = get_post_meta($post_id);
-				foreach ($post_meta as $meta_key => $meta_values) {
-					foreach ($meta_values as $meta_value) {
-						add_post_meta($new_post_id, $meta_key, maybe_unserialize(Duplicator_Post_Page_Helper::recursively_slash_strings($meta_value)));
-					}
+	if ($post) {
+		$new_post = array(
+			'post_title'    => Duplicator_Post_Page_Helper::recursively_slash_strings($post->post_title . ' (Copy)'),
+			'post_content'  => Duplicator_Post_Page_Helper::recursively_slash_strings($post->post_content),
+			'post_status'   => 'draft',
+			'post_type'     => $post->post_type,
+			'post_author'   => $post->post_author,
+		);
+		$new_post_id = wp_insert_post($new_post);
+
+		if ($new_post_id) {
+			// Copy metadata
+			$post_meta = get_post_meta($post_id);
+			foreach ($post_meta as $meta_key => $meta_values) {
+				foreach ($meta_values as $meta_value) {
+					add_post_meta($new_post_id, $meta_key, maybe_unserialize(Duplicator_Post_Page_Helper::recursively_slash_strings($meta_value)));
 				}
-
-				// Copy taxonomies
-				$taxonomies = get_object_taxonomies($post->post_type);
-				foreach ($taxonomies as $taxonomy) {
-					$terms = wp_get_object_terms($post_id, $taxonomy, array('fields' => 'ids'));
-					wp_set_object_terms($new_post_id, $terms, $taxonomy);
-				}
-
-				// Redirect to the edit screen for the new post/page
-				wp_redirect(admin_url('edit.php?post_type=' . $post->post_type));
-				exit;
 			}
+
+			// Copy taxonomies
+			$taxonomies = get_object_taxonomies($post->post_type);
+			foreach ($taxonomies as $taxonomy) {
+				$terms = wp_get_object_terms($post_id, $taxonomy, array('fields' => 'ids'));
+				wp_set_object_terms($new_post_id, $terms, $taxonomy);
+			}
+
+			// Redirect to the edit screen for the new post/page
+			wp_redirect(admin_url('edit.php?post_type=' . $post->post_type));
+			exit;
 		}
 	}
+}
 }
 add_action('admin_action_duplicator_post_page', 'duplicator_post_page');
 
