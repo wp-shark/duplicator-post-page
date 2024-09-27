@@ -8,7 +8,11 @@ Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-== Short Description ==
+
+Easily duplicate any post or page, including all metadata and taxonomies, with just one click.
+
+
+== Description ==
 The **Duplicator Post Page** plugin allows you to duplicate any post or page with a single click. This plugin is handy to quickly create a copy of an existing post or page, including all its metadata and taxonomies.
 
 = Features =
