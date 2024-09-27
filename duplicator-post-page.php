@@ -4,7 +4,7 @@
  * Description:       Duplicate post and page with a single click.
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            @iqbal1hossain
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -29,7 +29,7 @@ define('DUPLICATOR_POST_PAGE_PLUGIN_DIR', plugin_dir_path(__FILE__));
  * @since 1.0.0
  */
 class Duplicator_Post_Page_Version {
-	const PLUGIN_VERSION = '1.0.0';
+	const PLUGIN_VERSION = '1.0.1';
 
 	public static function get_plugin_version() {
 		return self::PLUGIN_VERSION;
@@ -71,12 +71,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'duplicator_post_page' && isset
 		wp_die( esc_html__( 'Nonce verification failed.', 'duplicator-post-page' ) );
 	}
 
+	// Unslash and sanitize the post ID from $_GET
+	$post_id = absint( wp_unslash( $_GET['post'] ) );
+
 	// Check if the current user has permission to edit posts/pages
-	if ( ! current_user_can( 'edit_post', $_GET['post'] ) ) {
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
 		wp_die( esc_html__( 'You are not allowed to duplicate this post.', 'duplicator-post-page' ) );
 	}
 
-	$post_id = absint($_GET['post']);
 	$post = get_post($post_id);
 
 	if ($post) {
