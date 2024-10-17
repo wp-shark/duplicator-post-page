@@ -13,13 +13,21 @@ Easily duplicate any post or page, including all metadata and taxonomies, with j
 
 
 == Description ==
-The **Duplicator Post Page** plugin allows you to duplicate any post or page with a single click. This plugin is handy to quickly create a copy of an existing post or page, including all its metadata and taxonomies.
+
+**Duplicator Post Page** is a simple yet powerful WordPress plugin that allows you to easily duplicate any post or page, including all associated metadata and taxonomies, with just a single click. This tool is ideal for users who frequently need to clone existing content, making it quicker to create similar posts or pages without the hassle of manually copying and pasting content.
+
+Whether you're managing a blog, running a website, or developing for clients, the **Duplicator Post Page** plugin simplifies content duplication, saving you time and ensuring all relevant data is retained.
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GzBJW-NE1l8?si=eRIUUXEQajRx8XjX" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 = Features =
-* Duplicate Posts and Pages.
-* Copy Metadata.
-* Copy Taxonomies.
-* Quick Access via the "Duplicate" link in post and page action links.
+
+* Duplicate Posts and Pages: Create an exact copy of any post or page with just one click.
+* Retain Metadata: All custom fields and metadata from the original post or page are duplicated to the new version.
+* Retain Taxonomies: Categories, tags, and custom taxonomies are also copied along with the content.
+* Quick Access: Easily accessible "Duplicate" link available in the post and page action links within the WordPress admin interface.
+* Draft Status: The duplicated post or page is saved as a draft, allowing you to make further changes before publishing.
 
 == Installation ==
 
