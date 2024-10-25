@@ -1,6 +1,6 @@
 === Duplicator Post Page ===
 Contributors: iqbal1hossain
-Tags: duplicate, post, page, meta, taxonomies
+Tags: copy pages, copy posts, duplicate pages, duplicate post, duplicate posts
 Requires at least: 6.1
 Tested up to: 6.6
 Requires PHP: 7.0
