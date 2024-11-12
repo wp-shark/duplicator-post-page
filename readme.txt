@@ -4,7 +4,7 @@ Tags: copy pages, copy posts, duplicate pages, duplicate post, duplicate posts
 Requires at least: 6.1
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,9 @@ Currently, the plugin supports duplicating posts and pages. Custom post-type sup
 Yes, the duplicated post or page will retain all metadata and taxonomies associated with the original.
 
 == Changelog ==
+
+= 1.0.3 =
+* Added: custom row meta to the plugin description in the Plugins page.
 
 = 1.0.0 =
 * Initial release of Duplicator Post Page.
