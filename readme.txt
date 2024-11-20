@@ -2,7 +2,7 @@
 Contributors: iqbal1hossain
 Tags: copy pages, copy posts, duplicate pages, duplicate post, duplicate posts
 Requires at least: 6.1
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.0
 Stable tag: 1.0.3
 License: GPLv2 or later
