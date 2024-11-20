@@ -48,6 +48,9 @@ Yes, the duplicated post or page will retain all metadata and taxonomies associa
 
 == Changelog ==
 
+= 1.1.0 =
+* Improved: Security enhancements.
+
 = 1.0.3 =
 * Added: custom row meta to the plugin description in the Plugins page.
 
