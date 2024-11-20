@@ -41,7 +41,7 @@ composer.lock
 
 # Allow specific files and directories inside scoped/vendor/
 # /vendor/
-# /scoped/vendor/*
+# /vendor/*
 # !/vendor/composer/
 # !/vendor/enshrined/
 # !/vendor/ezyang/
