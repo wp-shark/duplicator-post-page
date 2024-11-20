@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  * Class Hooks
  * Handles the duplication of posts/pages and custom actions/filters.
  *
- * @since 1.0.3
+ * @since 1.1.1
  */
 class Hooks {
 

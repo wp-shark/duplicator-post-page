@@ -5,7 +5,7 @@
  * Description:       Duplicate posts and pages with a single click.
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           1.0.3
+ * Version:           1.1.1
  * Author:            Iqbal Hossain
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Final class for the Duplicator Post Page plugin.
  *
- * @since 1.0.3
+ * @since 1.1.1
  */
 final class Duplicator_Post_Page {
 	/**
@@ -27,7 +27,7 @@ final class Duplicator_Post_Page {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.0.3';
+	const VERSION = '1.1.1';
 
 	/**
 	 * Plugin instance.
@@ -95,7 +95,7 @@ final class Duplicator_Post_Page {
 		 * Fires before the initialization of the Duplicator Post Page plugin.
 		 *
 		 * This action hook allows developers to perform additional tasks before the Duplicator Post Page plugin has been initialized.
-		 * @since 1.0.3
+		 * @since 1.1.1
 		 */
 		do_action( 'duplicator_post_page/before_init' );
 
@@ -117,14 +117,14 @@ final class Duplicator_Post_Page {
 		/**
 		 * Register hooks for the plugin.
 		 *
-		 * @since 1.0.3
+		 * @since 1.1.1
 		 */
 		new DuplicatorPostPage\Hooks();
 
 		/**
 		 * Register Utils for the plugin.
 		 *
-		 * @since 1.0.3
+		 * @since 1.1.1
 		 */
 		new DuplicatorPostPage\Helpers\Utils();
 
