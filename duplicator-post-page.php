@@ -16,6 +16,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Final class for the Duplicator Post Page plugin.
+ *
+ * @since 1.0.3
+ */
 final class Duplicator_Post_Page {
 	/**
 	 * Plugin version.
