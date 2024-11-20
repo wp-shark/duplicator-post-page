@@ -42,9 +42,7 @@ composer.lock
 # Allow specific files and directories inside scoped/vendor/
 # /vendor/
 # /scoped/vendor/*
-# !/scoped/vendor/composer/
-# !/scoped/vendor/enshrined/
-# !/scoped/vendor/ezyang/
-# !/scoped/vendor/wpmet/
-# !/scoped/vendor/autoload.php
-# !/scoped/vendor/scoper-autoload.php
+# !/vendor/composer/
+# !/vendor/enshrined/
+# !/vendor/ezyang/
+# !/vendor/autoload.php
