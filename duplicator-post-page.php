@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Plugin Name:       Duplicator Post Page
+ * Plugin Name:       Duplicator Post Page - One-Click Duplicator, Page & Post Copier, Content Duplicator
  * Description:       Duplicate posts and pages with a single click.
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           1.1.1
+ * Version:           1.1.2
  * Author:            Iqbal Hossain
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -27,7 +27,7 @@ final class Duplicator_Post_Page {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.1.1';
+	const VERSION = '1.1.2';
 
 	/**
 	 * Plugin instance.

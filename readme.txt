@@ -1,10 +1,10 @@
-=== Duplicator Post Page ===
+=== Duplicator Post Page - One-Click Duplicator, Page & Post Copier, Content Duplicator ===
 Contributors: iqbal1hossain
 Tags: copy pages, copy posts, duplicate pages, duplicate post, duplicate posts
 Requires at least: 6.1
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,9 @@ Currently, the plugin supports duplicating posts and pages. Custom post-type sup
 Yes, the duplicated post or page will retain all metadata and taxonomies associated with the original.
 
 == Changelog ==
+
+= 1.1.2 =
+* Improved: Few minor bug fixes & improvements.
 
 = 1.1.1 =
 * Improved: Security enhancements.
